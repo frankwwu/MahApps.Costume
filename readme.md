@@ -1,3 +1,3 @@
 ## MahApps.Costume
 
-![](figures/mahapps.jpg)
+![](figures/mahapps.gif)
