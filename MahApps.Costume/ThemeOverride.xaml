@@ -151,7 +151,7 @@
         <Setter Property="Foreground" Value="{DynamicResource LabelTextBrush}" />
         <Style.Triggers>
             <Trigger Property="IsEnabled" Value="False">
-                <Setter Property = "Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                <Setter Property="Foreground" Value="{StaticResource {x:Static SystemColors.GrayTextBrushKey}}"/>
             </Trigger>
         </Style.Triggers>
     </Style>
