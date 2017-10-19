@@ -1,6 +1,13 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls">
+                    xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+                    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+                    xmlns:xceed="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
+                    xmlns:dock="http://schemas.xceed.com/wpf/xaml/avalondock" >
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="AvalonDockThemeOverride.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
     <!--Override TabItem-->
     <Style BasedOn="{StaticResource MetroTabItem}" TargetType="{x:Type TabItem}">
         <Setter Property="Template">
@@ -146,8 +153,53 @@
             </Setter.Value>
         </Setter>
     </Style>
-     <!--TextBlock-->
+    <!--ToolBarTray-->
+    <Style TargetType="{x:Type ToolBarTray}">
+        <Setter Property="Background" Value="{DynamicResource AccentColorBrush4}" />
+    </Style>
+    <!--TextBlock-->
     <Style TargetType="{x:Type TextBlock}">
+        <Setter Property="Foreground" Value="{DynamicResource LabelTextBrush}" />
+        <Style.Triggers>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Foreground" Value="{StaticResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <!--ListBox-->
+    <!--<Style TargetType="{x:Type ListBox}">
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AccentColorBrush3}"/>
+    </Style>-->
+    <!--Xceed Control Theme overrides-->
+    <Style TargetType="{x:Type xctk:MultiLineTextEditor}">
+        <Setter Property="Background" Value="Transparent" />
+    </Style>
+    <Style TargetType="{x:Type xceed:DecimalUpDown}">
+        <Setter Property="Foreground" Value="{DynamicResource LabelTextBrush}" />
+        <Style.Triggers>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Foreground" Value="{StaticResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style TargetType="{x:Type xceed:DoubleUpDown}">
+        <Setter Property="Foreground" Value="{DynamicResource LabelTextBrush}" />
+        <Style.Triggers>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Foreground" Value="{StaticResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style TargetType="{x:Type xceed:IntegerUpDown}">
+        <Setter Property="Foreground" Value="{DynamicResource LabelTextBrush}" />
+        <Style.Triggers>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Foreground" Value="{StaticResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style TargetType="{x:Type xceed:LongUpDown}">
         <Setter Property="Foreground" Value="{DynamicResource LabelTextBrush}" />
         <Style.Triggers>
             <Trigger Property="IsEnabled" Value="False">
