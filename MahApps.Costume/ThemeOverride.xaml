@@ -2,10 +2,14 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
                     xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-                    xmlns:xceed="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit" >
+                    xmlns:xceed="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
+                    xmlns:conv="clr-namespace:Xceed.Wpf.Toolkit.Core.Converters;assembly=Xceed.Wpf.Toolkit"
+                    xmlns:themes="clr-namespace:Xceed.Wpf.Toolkit.Themes;assembly=Xceed.Wpf.Toolkit">
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="AvalonDockThemeOverride.xaml" />
     </ResourceDictionary.MergedDictionaries>
+
+    <conv:WizardPageButtonVisibilityConverter x:Key="WizardPageButtonVisibilityConverter" />
 
     <!--Override TabItem-->
     <Style BasedOn="{StaticResource MetroTabItem}" TargetType="{x:Type TabItem}">
@@ -109,6 +113,7 @@
             </Setter.Value>
         </Setter>
     </Style>
+
     <!--Override DataGridColumnHeader-->
     <Style BasedOn="{StaticResource MetroDataGridColumnHeader}" TargetType="{x:Type DataGridColumnHeader}">
         <Setter Property="BorderThickness" Value="1" />
@@ -169,10 +174,12 @@
             </Setter.Value>
         </Setter>
     </Style>
+
     <!--ToolBarTray-->
     <Style TargetType="{x:Type ToolBarTray}">
         <Setter Property="Background" Value="{DynamicResource AccentColorBrush4}" />
     </Style>
+
     <!--TextBlock-->
     <Style TargetType="{x:Type TextBlock}">
         <Setter Property="Foreground" Value="{DynamicResource LabelTextBrush}" />
@@ -182,15 +189,110 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+
     <!--ListBox-->
     <!--<Style TargetType="{x:Type ListBox}">
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="BorderBrush" Value="{DynamicResource AccentColorBrush3}"/>
     </Style>-->
+
     <!--Xceed Control Theme overrides-->
+
+    <!--Wizard: Move the Cancel button to the right side-->
+    <Style TargetType="{x:Type xceed:Wizard}">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="{DynamicResource {x:Static themes:ResourceKeys.ControlNormalBorderKey}}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <Grid />
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type xceed:Wizard}">
+                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" 
+                            BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}">
+                        <Grid >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <ContentPresenter Content="{Binding CurrentPage, RelativeSource={RelativeSource TemplatedParent}}" />
+
+                            <Border Grid.Row="1" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0,1,0,0" Padding="7">
+                                <StackPanel>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Button Name="PART_HelpButton" Grid.Column="0" MinWidth="75" 
+                                                Command="xceed:WizardCommands.Help" Content="{TemplateBinding HelpButtonContent}">
+                                            <Button.Visibility>
+                                                <MultiBinding Converter="{StaticResource WizardPageButtonVisibilityConverter}">
+                                                    <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="HelpButtonVisibility" />
+                                                    <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="CurrentPage.HelpButtonVisibility" />
+                                                </MultiBinding>
+                                            </Button.Visibility>
+                                        </Button>
+                                        <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                                            <Button Name="PART_BackButton" Margin="4,0" MinWidth="75" Command="xceed:WizardCommands.PreviousPage" 
+                                                    Content="{TemplateBinding BackButtonContent}">
+                                                <Button.Visibility>
+                                                    <MultiBinding Converter="{StaticResource WizardPageButtonVisibilityConverter}">
+                                                        <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="BackButtonVisibility" />
+                                                        <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="CurrentPage.BackButtonVisibility" />
+                                                    </MultiBinding>
+                                                </Button.Visibility>
+                                            </Button>
+                                            <Button Name="PART_NextButton" Margin="4,0" MinWidth="75" Command="xceed:WizardCommands.NextPage"
+                                                    Content="{TemplateBinding NextButtonContent}">
+                                                <Button.Visibility>
+                                                    <MultiBinding Converter="{StaticResource WizardPageButtonVisibilityConverter}">
+                                                        <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="NextButtonVisibility" />
+                                                        <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="CurrentPage.NextButtonVisibility" />
+                                                    </MultiBinding>
+                                                </Button.Visibility>
+                                            </Button>
+                                            <Button Name="PART_FinishButton" Margin="4,0" MinWidth="75" Command="xceed:WizardCommands.Finish" 
+                                                    Content="{TemplateBinding FinishButtonContent}">
+                                                <Button.Visibility>
+                                                    <MultiBinding Converter="{StaticResource WizardPageButtonVisibilityConverter}">
+                                                        <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="FinishButtonVisibility" />
+                                                        <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="CurrentPage.FinishButtonVisibility" />
+                                                    </MultiBinding>
+                                                </Button.Visibility>
+                                            </Button>
+                                            <Button Name="PART_CancelButton" Margin="4,0,7,0" MinWidth="75" Command="xceed:WizardCommands.Cancel" 
+                                                    Content="{TemplateBinding CancelButtonContent}">
+                                                <Button.Visibility>
+                                                    <MultiBinding Converter="{StaticResource WizardPageButtonVisibilityConverter}">
+                                                        <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="CancelButtonVisibility" />
+                                                        <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="CurrentPage.CancelButtonVisibility" />
+                                                    </MultiBinding>
+                                                </Button.Visibility>
+                                            </Button>
+                                        </StackPanel>
+                                    </Grid>
+                                </StackPanel>
+                            </Border>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--MultiLineTextEditor-->
     <Style TargetType="{x:Type xctk:MultiLineTextEditor}">
         <Setter Property="Background" Value="Transparent" />
     </Style>
+
+    <!--DecimalUpDown-->
     <Style TargetType="{x:Type xceed:DecimalUpDown}">
         <Setter Property="Foreground" Value="{DynamicResource LabelTextBrush}" />
         <Style.Triggers>
@@ -199,6 +301,8 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+
+    <!--DoubleUpDown-->
     <Style TargetType="{x:Type xceed:DoubleUpDown}">
         <Setter Property="Foreground" Value="{DynamicResource LabelTextBrush}" />
         <Style.Triggers>
@@ -207,6 +311,8 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+
+    <!--IntegerUpDown-->
     <Style TargetType="{x:Type xceed:IntegerUpDown}">
         <Setter Property="Foreground" Value="{DynamicResource LabelTextBrush}" />
         <Style.Triggers>
@@ -215,6 +321,8 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+
+    <!--LongUpDown-->
     <Style TargetType="{x:Type xceed:LongUpDown}">
         <Setter Property="Foreground" Value="{DynamicResource LabelTextBrush}" />
         <Style.Triggers>

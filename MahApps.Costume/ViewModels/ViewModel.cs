@@ -1,21 +1,21 @@
-﻿using System;
+﻿using MahApps.Metro;
+using MahAppsDemo.Models;
+using MahAppsDemo.Mvvm;
+using MahAppsDemo.Services;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Media;
-using MahApps.Metro;
-using MahAppsDemo.Models;
-using MahAppsDemo.Services;
 
 namespace MahAppsDemo.ViewModels
 {
     [Export(typeof(ViewModel))]
-    public class ViewModel : INotifyPropertyChanged
+    public class ViewModel : BindableBase
     {
         private readonly IDataService _dataService;
+        private Window _window;
 
         [ImportingConstructor]
         public ViewModel(IDataService dataService)
@@ -50,14 +50,6 @@ namespace MahAppsDemo.ViewModels
 
         public List<AppThemeMenuData> AppThemes { get; set; }
 
-        private WindowState _WindowState;
-
-        public WindowState WindowState
-        {
-            get { return (WindowState)Enum.Parse(typeof(WindowState), Properties.Settings.Default.WindowState); }
-            set { Properties.Settings.Default.WindowState = value.ToString(); Properties.Settings.Default.Save(); }
-        }
-
         public List<DataItem> DataItems { get; private set; }
 
         public List<SpecialFolder> SpecialFolders { get; private set; }
@@ -86,15 +78,43 @@ namespace MahAppsDemo.ViewModels
             set { _isEditingDataItem = value; OnPropertyChanged(); }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        #region OpenWizardCommand
 
-        protected void OnPropertyChanged([CallerMemberName] String name = null)
+        public ICommand OpenWizardCommand
         {
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if (handler != null)
+            get { return new DelegateCommand<object>(OpenWizard, o => { return true; }); }
+        }
+
+        internal void OpenWizard(object parameter)
+        {
+            Xceed.Wpf.Toolkit.Wizard wizard = parameter as Xceed.Wpf.Toolkit.Wizard;
+            if (wizard != null)
             {
-                handler(this, new PropertyChangedEventArgs(name));
+                WizardViewModel viewModel = new WizardViewModel();
+                wizard.DataContext = viewModel;
+                wizard.CurrentPage = wizard.Items[0] as Xceed.Wpf.Toolkit.WizardPage;
+                if (_window != null)
+                {
+                    _window.Content = null;
+                    _window = null;
+                }
+                _window = new System.Windows.Window();
+                _window.Owner = Application.Current.MainWindow;
+                _window.Title = "Demo Wizard";
+                _window.Content = wizard;
+                _window.Width = 600;
+                _window.Height = 400;
+                _window.WindowStyle = WindowStyle.ToolWindow;
+                _window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                // Window will be closed by Wizard because FinishButtonClosesWindow = true and CancelButtonClosesWindow = true
+                bool? ret = _window.ShowDialog();
+                if ((ret.HasValue) && (ret.Value))
+                {
+                    // Do something here.
+                }
             }
         }
+
+        #endregion EditCommand       
     }
 }

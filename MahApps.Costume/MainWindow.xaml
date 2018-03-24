@@ -3,10 +3,10 @@
                       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"      
                       xmlns:sys="clr-namespace:System;assembly=mscorlib"
                       xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"  
+                      xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"                      
                       xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"                                       
                       xmlns:beh="clr-namespace:MahAppsDemo.Behaviors" 
                       xmlns:local="clr-namespace:MahAppsDemo" 
-                      WindowState="{Binding WindowState, Mode=TwoWay}"
                       Title="MahApps Theme Extensions" >
     <Controls:MetroWindow.Resources>
         <ResourceDictionary>
@@ -31,6 +31,14 @@
                 <Setter Property="Icon" Value="{StaticResource AccentMenuIcon}" />
                 <Setter Property="Header" Value="{Binding NameDisplay, Mode=OneWay}" />
             </Style>
+            <xctk:Wizard x:Key="DemoWizard" FinishButtonClosesWindow="True" HelpButtonVisibility="Collapsed" >
+                <xctk:WizardPage PageType="Blank" Background="Transparent" CanSelectNextPage="{Binding CanNextFromPage1, UpdateSourceTrigger=PropertyChanged}"  >
+                    <TextBlock Text="Page 1" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                </xctk:WizardPage>
+                <xctk:WizardPage PageType="Blank" Background="Transparent" CanFinish="{Binding CanFinish, UpdateSourceTrigger=PropertyChanged}" >
+                    <TextBlock Text="Page 2" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                </xctk:WizardPage>
+            </xctk:Wizard>
         </ResourceDictionary>
     </Controls:MetroWindow.Resources>
     <Controls:MetroWindow.RightWindowCommands>
@@ -89,12 +97,14 @@
                         <CheckBox x:Name="chk" Grid.Row="1" Content="IsEditable" Margin="8" />
                     </Grid>
                 </TabItem>
+                <TabItem Header="Wizard">
+                    <Button Content="Wizard" Command="{Binding OpenWizardCommand}"  CommandParameter="{StaticResource DemoWizard}" 
+                            HorizontalAlignment="Center" VerticalAlignment="Center" />
+                </TabItem>
                 <TabItem Header="Demo Tab">
 
                 </TabItem>
-                <TabItem Header="More Tab">
 
-                </TabItem>
             </TabControl>
         </Grid>
         <StatusBar Grid.Row="2">

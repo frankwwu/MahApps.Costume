@@ -91,9 +91,12 @@
     <Compile Include="Behaviors\DataGridComboBoxScrollBehavior.cs" />
     <Compile Include="Models\DataItem.cs" />
     <Compile Include="Models\SpecialFolder.cs" />
+    <Compile Include="Mvvm\BindableBase.cs" />
+    <Compile Include="Mvvm\DelegateCommand.cs" />
     <Compile Include="Services\DataService.cs" />
     <Compile Include="Services\IDataService.cs" />
     <Compile Include="ViewModels\ViewModel.cs" />
+    <Compile Include="ViewModels\WizardViewModel.cs" />
     <Page Include="AvalonDockThemeOverride.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
