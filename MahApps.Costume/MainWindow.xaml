@@ -6,6 +6,7 @@
                       xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"                      
                       xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"                                       
                       xmlns:beh="clr-namespace:MahAppsDemo.Behaviors" 
+                      xmlns:mvvm="clr-namespace:MahAppsDemo.Mvvm" 
                       xmlns:local="clr-namespace:MahAppsDemo" 
                       Title="MahApps Theme Extensions" >
     <Controls:MetroWindow.Resources>
@@ -32,6 +33,14 @@
                 <Setter Property="Header" Value="{Binding NameDisplay, Mode=OneWay}" />
             </Style>
             <xctk:Wizard x:Key="DemoWizard" FinishButtonClosesWindow="True" HelpButtonVisibility="Collapsed" FinishButtonVisibility="Visible" >
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Next">
+                        <mvvm:EventToCommand Command="{Binding NextCommand}" PassEventArgsToCommand="True" />
+                    </i:EventTrigger>
+                    <i:EventTrigger EventName="Finish">
+                        <mvvm:EventToCommand Command="{Binding FinishCommand}" PassEventArgsToCommand="True" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
                 <xctk:WizardPage PageType="Blank" Background="Transparent" CanSelectNextPage="{Binding CanNextFromPage1, UpdateSourceTrigger=PropertyChanged}"  >
                     <TextBlock Text="Page 1" HorizontalAlignment="Center" VerticalAlignment="Center" />
                 </xctk:WizardPage>
