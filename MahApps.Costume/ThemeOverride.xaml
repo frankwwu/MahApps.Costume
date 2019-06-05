@@ -189,6 +189,14 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+ 
+    <!--ComboBox-->
+    <!--Don't use MahApps styel because it's slow.-->
+    <Style TargetType="{x:Type ComboBox}">
+        <Setter Property="MinHeight" Value="26" />
+        <Setter Property="IsEditable" Value="True" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+    </Style>
 
     <!--ListBox-->
     <!--<Style TargetType="{x:Type ListBox}">
@@ -295,6 +303,7 @@
     <!--DecimalUpDown-->
     <Style TargetType="{x:Type xceed:DecimalUpDown}">
         <Setter Property="Foreground" Value="{DynamicResource LabelTextBrush}" />
+        <Setter Property="MinHeight" Value="26" />
         <Style.Triggers>
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="Foreground" Value="{StaticResource {x:Static SystemColors.GrayTextBrushKey}}"/>
@@ -305,6 +314,7 @@
     <!--DoubleUpDown-->
     <Style TargetType="{x:Type xceed:DoubleUpDown}">
         <Setter Property="Foreground" Value="{DynamicResource LabelTextBrush}" />
+        <Setter Property="MinHeight" Value="26" />
         <Style.Triggers>
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="Foreground" Value="{StaticResource {x:Static SystemColors.GrayTextBrushKey}}"/>
@@ -315,6 +325,7 @@
     <!--IntegerUpDown-->
     <Style TargetType="{x:Type xceed:IntegerUpDown}">
         <Setter Property="Foreground" Value="{DynamicResource LabelTextBrush}" />
+        <Setter Property="MinHeight" Value="26" />
         <Style.Triggers>
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="Foreground" Value="{StaticResource {x:Static SystemColors.GrayTextBrushKey}}"/>
@@ -325,10 +336,26 @@
     <!--LongUpDown-->
     <Style TargetType="{x:Type xceed:LongUpDown}">
         <Setter Property="Foreground" Value="{DynamicResource LabelTextBrush}" />
+        <Setter Property="MinHeight" Value="26" />
         <Style.Triggers>
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="Foreground" Value="{StaticResource {x:Static SystemColors.GrayTextBrushKey}}"/>
             </Trigger>
         </Style.Triggers>
     </Style>
+
+    <!--AutoCompleteBox-->
+    <!--xmlns:toolkit="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Input.Toolkit"-->
+    <!--<Style TargetType="{x:Type toolkit:AutoCompleteBox}">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="{DynamicResource LabelTextBrush}" />
+        <Style.Triggers>
+            <Trigger Property="SelectedItem" Value="{x:Null}">
+                <Setter Property="Foreground" Value="Red" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Foreground" Value="{StaticResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>-->
 </ResourceDictionary>
