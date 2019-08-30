@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.Composition.Hosting;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.Composition.Hosting;
 using System.Windows;
-using MahAppsDemo;
 
-namespace MahThemeDemo
+namespace MahAppsDemo
 {
     /// <summary>
     /// Interaction logic for App.xaml

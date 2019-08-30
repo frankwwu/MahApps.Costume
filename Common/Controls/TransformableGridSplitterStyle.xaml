@@ -1,6 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="clr-namespace:MahAppsDemo" >
+                    xmlns:ctrls="clr-namespace:Common.Controls" >
     <Style x:Key="GridSplitterPreviewStyle">
         <Setter Property="Control.Template">
             <Setter.Value>
@@ -19,7 +19,7 @@
                     <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}">
                         <StackPanel Orientation="Horizontal">
                             <ToggleButton x:Name="toggle" IsChecked="{Binding IsLayoutRotated, Mode=TwoWay}" 
-                                          local:GridLayoutTransformer.IsRotated="{Binding IsChecked, Mode=TwoWay, ElementName=toggle}"
+                                          ctrls:GridLayoutTransformer.IsRotated="{Binding IsChecked, Mode=TwoWay, ElementName=toggle}"
                                           HorizontalContentAlignment="Center" VerticalContentAlignment="Center" ToolTip="Rotate layout"
                                           Background="{DynamicResource AccentColorBrush2}"
                                           VerticalAlignment="Center" Cursor="Arrow" Width="5" Height="40" >

@@ -2,7 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Interactivity;
 
-namespace MahAppsDemo.Behaviors
+namespace Common.Behaviors
 {
     /// <summary>
     /// Used for ComboBox with DataGridComboBoxStyle style to scroll to the selected row in the dropdown DataGrid.

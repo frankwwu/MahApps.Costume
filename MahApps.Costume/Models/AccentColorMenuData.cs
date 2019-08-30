@@ -1,8 +1,9 @@
-﻿using System;
+﻿using Common.Mvvm;
+using MahApps.Metro;
+using System;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Media;
-using MahApps.Metro;
 
 namespace MahAppsDemo.Models
 {

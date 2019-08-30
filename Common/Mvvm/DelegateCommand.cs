@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace MahAppsDemo.Mvvm
+namespace Common.Mvvm
 {
     public class DelegateCommand<T> : ICommand
     {

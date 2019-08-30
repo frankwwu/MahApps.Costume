@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Interactivity;
 
-namespace MahAppsDemo.Mvvm
+namespace Common.Mvvm
 {
     public interface IEventArgsConverter
     {

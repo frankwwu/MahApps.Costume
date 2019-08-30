@@ -4,13 +4,13 @@ using System.ComponentModel;
 using System.Windows.Controls;
 using System.Windows.Interactivity;
 
-namespace MahAppsDemo.Behaviors
+namespace Common.Behaviors
 {
     public class ColumnHeaderBehavior : Behavior<DataGrid>
     {
         protected override void OnAttached()
         {
-            AssociatedObject.AutoGeneratingColumn += new EventHandler<DataGridAutoGeneratingColumnEventArgs>(OnAutoGeneratingColumn);       
+            AssociatedObject.AutoGeneratingColumn += new EventHandler<DataGridAutoGeneratingColumnEventArgs>(OnAutoGeneratingColumn);
         }
 
         protected override void OnDetaching()
@@ -35,7 +35,7 @@ namespace MahAppsDemo.Behaviors
         {
             PropertyDescriptor pd = descriptor as PropertyDescriptor;
             if (pd != null)
-            {               
+            {
                 DisplayNameAttribute attr = pd.Attributes[typeof(DisplayNameAttribute)] as DisplayNameAttribute;
                 if ((attr != null) && (attr != DisplayNameAttribute.Default))
                 {

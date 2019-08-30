@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace MahAppsDemo.Mvvm
+namespace Common.Mvvm
 {
     public class BindableBase : INotifyPropertyChanged
     {

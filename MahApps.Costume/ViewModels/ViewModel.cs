@@ -1,6 +1,6 @@
-﻿using MahApps.Metro;
+﻿using Common.Mvvm;
+using MahApps.Metro;
 using MahAppsDemo.Models;
-using MahAppsDemo.Mvvm;
 using MahAppsDemo.Services;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
@@ -115,6 +115,48 @@ namespace MahAppsDemo.ViewModels
             }
         }
 
-        #endregion EditCommand       
+        #endregion OpenWizardCommand
+
+        #region OpenWizardEventCommand
+
+        public ICommand OpenWizardEventCommand
+        {
+            get { return new DelegateCommand<object>(OpenWizard, o => { return true; }); }
+        }
+
+        internal void OpenWizardEvent(object parameter)
+        {
+            Xceed.Wpf.Toolkit.Wizard wizard = parameter as Xceed.Wpf.Toolkit.Wizard;
+            if (wizard != null)
+            {
+                WizardViewModel viewModel = new WizardViewModel();
+                wizard.DataContext = viewModel;
+                wizard.CurrentPage = wizard.Items[0] as Xceed.Wpf.Toolkit.WizardPage;
+                wizard.Next += (s, e) => { viewModel.Next(e); };
+                wizard.Previous += (s, e) => { viewModel.Previous(e); };
+                wizard.Finish += (s, e) => { viewModel.Finish(e); };
+                if (_window != null)
+                {
+                    _window.Content = null;
+                    _window = null;
+                }
+                _window = new System.Windows.Window();
+                _window.Owner = Application.Current.MainWindow;
+                _window.Title = "Demo Wizard";
+                _window.Content = wizard;
+                _window.Width = 600;
+                _window.Height = 400;
+                _window.WindowStyle = WindowStyle.ToolWindow;
+                _window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                // Window will be closed by Wizard because FinishButtonClosesWindow = true and CancelButtonClosesWindow = true
+                bool? ret = _window.ShowDialog();
+                if ((ret.HasValue) && (ret.Value))
+                {
+                    // Do something here.
+                }
+            }
+        }
+
+        #endregion OpenWizardEventCommand       
     }
 }

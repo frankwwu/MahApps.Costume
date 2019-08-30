@@ -1,8 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"                   
+                    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
                     xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
-                    xmlns:beh="clr-namespace:MahAppsDemo.Behaviors" >
+                    xmlns:beh="clr-namespace:Common.Behaviors" >
 
     <Style x:Key="DataGridComboBoxStyle" TargetType="{x:Type ComboBox}" >
         <Setter Property="MinHeight" Value="26" />

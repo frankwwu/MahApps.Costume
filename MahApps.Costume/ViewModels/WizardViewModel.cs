@@ -1,15 +1,26 @@
-﻿using MahAppsDemo.Mvvm;
+﻿using Common.Mvvm;
 using Xceed.Wpf.Toolkit.Core;
 
 namespace MahAppsDemo.ViewModels
 {
     public class WizardViewModel : BindableBase
     {
+        private static int _count = 0;       
 
         public WizardViewModel()
         {
+            Number = _count++;
+
             NextCommand = new DelegateCommand<object>(Next);
             FinishCommand = new DelegateCommand<object>(Finish);
+        }
+
+        private int _number;
+
+        public int Number
+        {
+            get { return _number; }
+            set { _number = value; OnPropertyChanged(); }
         }
 
         public bool CanNextFromPage1
@@ -38,6 +49,17 @@ namespace MahAppsDemo.ViewModels
         }
 
         #endregion NextCommand
+
+        #region PreviousCommand
+
+        public DelegateCommand<object> PreviousCommand { get; private set; }
+
+        public void Previous(object parameter)
+        {
+            CancelRoutedEventArgs args = parameter as CancelRoutedEventArgs;
+        }
+
+        #endregion PreviousCommand
 
         #region FinishCommand
 
