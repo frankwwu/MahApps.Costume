@@ -4,7 +4,7 @@
                     xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
                     xmlns:xceed="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
                     xmlns:conv="clr-namespace:Xceed.Wpf.Toolkit.Core.Converters;assembly=Xceed.Wpf.Toolkit"
-                    xmlns:themes="clr-namespace:Xceed.Wpf.Toolkit.Themes;assembly=Xceed.Wpf.Toolkit">
+                    xmlns:themes="clr-namespace:Xceed.Wpf.Toolkit.Themes;assembly=Xceed.Wpf.Toolkit" >
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="AvalonDockThemeOverride.xaml" />
     </ResourceDictionary.MergedDictionaries>
@@ -137,7 +137,7 @@
                                                    RecognizesAccessKey="True"
                                                    ContentCharacterCasing="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(Controls:ControlsHelper.ContentCharacterCasing)}">
                             <Controls:ContentControlEx.Content>
-                                <TextBlock Text="{TemplateBinding Content}" Foreground="White" />
+                                <TextBlock Text="{TemplateBinding Content}" Foreground="{DynamicResource MetroDataGrid.HighlightTextBrush}" />
                             </Controls:ContentControlEx.Content>
                         </Controls:ContentControlEx>
                         <Path x:Name="SortArrow" Visibility="Collapsed" Stretch="Fill" Grid.Column="1"
@@ -189,7 +189,7 @@
             </Trigger>
         </Style.Triggers>
     </Style>
- 
+
     <!--ComboBox-->
     <!--Don't use MahApps styel because it's slow.-->
     <Style TargetType="{x:Type ComboBox}">
@@ -343,19 +343,4 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-
-    <!--AutoCompleteBox-->
-    <!--xmlns:toolkit="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Input.Toolkit"-->
-    <!--<Style TargetType="{x:Type toolkit:AutoCompleteBox}">
-        <Setter Property="Background" Value="Transparent" />
-        <Setter Property="Foreground" Value="{DynamicResource LabelTextBrush}" />
-        <Style.Triggers>
-            <Trigger Property="SelectedItem" Value="{x:Null}">
-                <Setter Property="Foreground" Value="Red" />
-            </Trigger>
-            <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="Foreground" Value="{StaticResource {x:Static SystemColors.GrayTextBrushKey}}"/>
-            </Trigger>
-        </Style.Triggers>
-    </Style>-->
 </ResourceDictionary>
