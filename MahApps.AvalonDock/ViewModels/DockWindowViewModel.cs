@@ -55,7 +55,10 @@ namespace MahApps.AvalonDock.ViewModels
 
         public void Close(object parameter)
         {
-            this.IsClosed = true;
+            if (CanClose)
+            {
+                this.IsClosed = true;
+            }
         }
 
         #endregion
