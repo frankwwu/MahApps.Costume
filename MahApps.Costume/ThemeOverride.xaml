@@ -13,6 +13,7 @@
 
     <!--Override TabItem-->
     <Style BasedOn="{StaticResource MetroTabItem}" TargetType="{x:Type TabItem}">
+        <Setter Property="FrameworkElement.Margin" Value="2,0,2,0" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="TabItem">
@@ -29,22 +30,22 @@
                                                        FontWeight="{TemplateBinding Controls:ControlsHelper.HeaderFontWeight}" Foreground="{TemplateBinding Foreground}"
                                                        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" Padding="{TemplateBinding Padding}" RecognizesAccessKey="True"
                                                        ContentCharacterCasing="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(Controls:ControlsHelper.ContentCharacterCasing)}"
-                                                       DockPanel.Dock="Top">
+                                                       DockPanel.Dock="Top" Margin="2">
                                 <Controls:ContentControlEx.Content>
                                     <TextBlock x:Name="header" Text="{TemplateBinding Header}" Foreground="{DynamicResource LabelTextBrush}"/>
                                 </Controls:ContentControlEx.Content>
                             </Controls:ContentControlEx>
-                            <Rectangle x:Name="Underline" Height="2" HorizontalAlignment="Stretch"
+                            <Rectangle x:Name="Underline" Height="3" HorizontalAlignment="Stretch"
                                        Visibility="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type TabControl}}, 
                                        Path=(Controls:TabControlHelper.IsUnderlined), Converter={StaticResource BooleanToVisibilityConverter}}"
-                                       DockPanel.Dock="Bottom" Margin="0, 1, 0, 0"/>
+                                       DockPanel.Dock="Bottom" />
                         </DockPanel>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="TabStripPlacement" Value="Left">
                             <Setter Property="DockPanel.Dock" TargetName="ContentSite" Value="Left" />
                             <Setter Property="DockPanel.Dock" TargetName="Underline" Value="Right" />
-                            <Setter Property="Width" TargetName="Underline" Value="2" />
+                            <Setter Property="Width" TargetName="Underline" Value="3" />
                             <Setter Property="Height" TargetName="Underline" Value="Auto" />
                             <Setter Property="Margin" TargetName="Underline" Value="1,0,0,0" />
                         </Trigger>
@@ -52,21 +53,21 @@
                             <Setter Property="DockPanel.Dock" TargetName="ContentSite" Value="Top" />
                             <Setter Property="DockPanel.Dock" TargetName="Underline" Value="Bottom" />
                             <Setter Property="DockPanel.Dock" TargetName="Underline" Value="Right" />
-                            <Setter Property="Height" TargetName="Underline" Value="2" />
+                            <Setter Property="Height" TargetName="Underline" Value="3" />
                             <Setter Property="Width" TargetName="Underline" Value="Auto" />
                             <Setter Property="Margin" TargetName="Underline" Value="0,1,0,0" />
                         </Trigger>
                         <Trigger Property="TabStripPlacement" Value="Right">
                             <Setter Property="DockPanel.Dock" TargetName="ContentSite" Value="Right" />
                             <Setter Property="DockPanel.Dock" TargetName="Underline" Value="Left" />
-                            <Setter Property="Width" TargetName="Underline" Value="2" />
+                            <Setter Property="Width" TargetName="Underline" Value="3" />
                             <Setter Property="Height" TargetName="Underline" Value="Auto" />
                             <Setter Property="Margin" TargetName="Underline" Value="0,0,1,0" />
                         </Trigger>
                         <Trigger Property="TabStripPlacement" Value="Bottom">
                             <Setter Property="DockPanel.Dock" TargetName="ContentSite" Value="Bottom" />
                             <Setter Property="DockPanel.Dock" TargetName="Underline" Value="Top" />
-                            <Setter Property="Height" TargetName="Underline" Value="2" />
+                            <Setter Property="Height" TargetName="Underline" Value="3" />
                             <Setter Property="Width" TargetName="Underline" Value="Auto" />
                             <Setter Property="Margin" TargetName="Underline" Value="0,0,0,1" />
                         </Trigger>
@@ -88,7 +89,7 @@
                                 <Condition Property="IsSelected" Value="True" />
                             </MultiTrigger.Conditions>
                             <Setter Property="TextElement.Foreground" TargetName="ContentSite" Value="{DynamicResource MetroDataGrid.HighlightTextBrush}" />
-                            <Setter Property="Fill" TargetName="Underline" Value="{DynamicResource HighlightBrush}" />
+                            <!--<Setter Property="Fill" TargetName="Underline" Value="{DynamicResource HighlightBrush}" />-->
                             <Setter Property="Background" Value="{DynamicResource AccentColorBrush}" />
                         </MultiTrigger>
                         <MultiTrigger>
@@ -97,8 +98,8 @@
                                 <Condition Property="IsSelected" Value="False" />
                             </MultiTrigger.Conditions>
                             <Setter Property="TextElement.Foreground" TargetName="ContentSite" Value="{DynamicResource MetroDataGrid.HighlightTextBrush}" />
-                            <Setter Property="Fill" TargetName="Underline" Value="{DynamicResource HighlightBrush}" />
-                            <Setter Property="Background" Value="{DynamicResource AccentColorBrush3}" />
+                            <Setter Property="Fill" TargetName="Underline" Value="{DynamicResource AccentColorBrush}" />
+                            <!--<Setter Property="Background" Value="{DynamicResource AccentColorBrush3}" />-->
                         </MultiTrigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
@@ -106,7 +107,7 @@
                                 <Condition Property="IsSelected" Value="False" />
                             </MultiTrigger.Conditions>
                             <Setter Property="Foreground" TargetName="header" Value="{DynamicResource LabelTextBrush}" />
-                            <Setter Property="Fill" TargetName="Underline" Value="{DynamicResource AccentColorBrush}" />
+                            <Setter Property="Fill" TargetName="Underline" Value="{DynamicResource AccentColorBrush4}" />
                         </MultiTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -178,16 +179,6 @@
     <!--ToolBarTray-->
     <Style TargetType="{x:Type ToolBarTray}">
         <Setter Property="Background" Value="{DynamicResource AccentColorBrush4}" />
-    </Style>
-
-    <!--TextBlock-->
-    <Style TargetType="{x:Type TextBlock}">
-        <Setter Property="Foreground" Value="{DynamicResource LabelTextBrush}" />
-        <Style.Triggers>
-            <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="Foreground" Value="{StaticResource {x:Static SystemColors.GrayTextBrushKey}}"/>
-            </Trigger>
-        </Style.Triggers>
     </Style>
 
     <!--ComboBox-->

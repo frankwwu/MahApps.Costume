@@ -151,7 +151,7 @@
                                 <ControlTemplate.Triggers>
                                     <Trigger Property="Selector.IsSelected" Value="True">
                                         <Setter Property="Control.BorderBrush" Value="{DynamicResource AccentColorBrush}" />
-                                        <Setter Property="Background" TargetName="txtBorder" Value="{DynamicResource AccentColorBrush4}" />
+                                        <Setter Property="Background" TargetName="txtBorder" Value="{DynamicResource AccentColorBrush}" />
                                         <Setter Property="Panel.ZIndex" Value="1" />
                                     </Trigger>
                                     <DataTrigger Binding="{Binding IsActive}" Value="True" >
@@ -161,8 +161,7 @@
                                     </DataTrigger>
                                     <DataTrigger Binding="{Binding IsActive}" Value="False" >
                                         <Setter Property="Control.BorderBrush" Value="{DynamicResource AccentColorBrush4}" />
-                                        <!--<Setter Property="Control.BorderBrush" Value="{DynamicResource AvalonDock_ThemeMetro_BaseColor1}" />-->
-                                        <Setter Property="Background" TargetName="txtBorder" Value="{DynamicResource AvalonDock_ThemeMetro_BaseColor1}" />
+                                        <!--<Setter Property="Background" TargetName="txtBorder" Value="{DynamicResource AvalonDock_ThemeMetro_BaseColor1}" />-->
                                         <Setter Property="Panel.ZIndex" Value="1" />
                                     </DataTrigger>
                                     <MultiTrigger>
