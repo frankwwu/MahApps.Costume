@@ -154,6 +154,9 @@ namespace MahAppsDemo.ViewModels
                 {
                     // Do something here.
                 }
+                wizard.Next -= (s, e) => { viewModel.Next(e); };
+                wizard.Previous -= (s, e) => { viewModel.Previous(e); };
+                wizard.Finish -= (s, e) => { viewModel.Finish(e); };
             }
         }
 

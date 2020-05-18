@@ -8,6 +8,7 @@
                       xmlns:beh="clr-namespace:Common.Behaviors;assembly=Common" 
                       xmlns:mvvm="clr-namespace:Common.Mvvm;assembly=Common" 
                       xmlns:ctrls="clr-namespace:Common.Controls;assembly=Common" 
+                      TitleCharacterCasing="Normal"
                       Title="MahApps Theme Extensions" >
     <Controls:MetroWindow.Resources>
         <ResourceDictionary>

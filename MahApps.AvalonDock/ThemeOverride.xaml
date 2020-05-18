@@ -119,61 +119,13 @@
     <Style BasedOn="{StaticResource MetroDataGridColumnHeader}" TargetType="{x:Type DataGridColumnHeader}">
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="Background" Value="{DynamicResource AccentColorBrush}" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type DataGridColumnHeader}">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <Border x:Name="BackgroundBorder" BorderThickness="{TemplateBinding BorderThickness}"
-                                Grid.ColumnSpan="2" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" />
-                        <Controls:ContentControlEx x:Name="HeaderContent"  
-                                                   ContentStringFormat="{TemplateBinding ContentStringFormat}" ContentTemplate="{TemplateBinding ContentTemplate}"
-                                                   ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
-                                                   SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                                                   HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                                   Padding="{TemplateBinding Padding}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-                                                   RecognizesAccessKey="True"
-                                                   ContentCharacterCasing="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(Controls:ControlsHelper.ContentCharacterCasing)}">
-                            <Controls:ContentControlEx.Content>
-                                <TextBlock Text="{TemplateBinding Content}" Foreground="{DynamicResource MetroDataGrid.HighlightTextBrush}" />
-                            </Controls:ContentControlEx.Content>
-                        </Controls:ContentControlEx>
-                        <Path x:Name="SortArrow" Visibility="Collapsed" Stretch="Fill" Grid.Column="1"
-                              Width="8" Height="10" Margin="0,0,8,2" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5"
-                              Fill="{DynamicResource MetroDataGrid.HighlightTextBrush}" />
-                        <Thumb x:Name="PART_LeftHeaderGripper" HorizontalAlignment="Left" HorizontalContentAlignment="Left"
-                               Background="Transparent" Style="{StaticResource MetroColumnHeaderGripperStyle}" />
-                        <Thumb x:Name="PART_RightHeaderGripper" HorizontalAlignment="Right" HorizontalContentAlignment="Right"
-                               Style="{StaticResource MetroColumnHeaderGripperStyle}" Grid.Column="1" />
-                    </Grid>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="SortDirection" Value="Ascending">
-                            <Setter TargetName="SortArrow" Property="Visibility" Value="Visible" />
-                            <Setter TargetName="SortArrow" Property="Data" 
-                                    Value="F1 M 34,57L 42,57L 42,32.25L 52,42.25L 52,31.75L 38,17.75L 24,31.75L 24,42.25L 34,32.25L 34,57 Z " />
-                        </Trigger>
-                        <Trigger Property="SortDirection" Value="Descending">
-                            <Setter TargetName="SortArrow" Property="Visibility" Value="Visible" />
-                            <Setter TargetName="SortArrow" Property="Data" 
-                                    Value="F1 M 42,19.0002L 34,19.0002L 34,43.7502L 24,33.7502L 24,44.2502L 38,58.2502L 52,44.2502L 52,33.7502L 42,43.7502L 42,19.0002 Z " />
-                            <Setter TargetName="SortArrow" Property="Margin" Value="0,0,8,0" />
-                        </Trigger>
-                        <Trigger Property="DisplayIndex" Value="0">
-                            <Setter Property="Visibility" Value="Collapsed" TargetName="PART_LeftHeaderGripper" />
-                        </Trigger>
-                        <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
-                        </Trigger>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" TargetName="BackgroundBorder" Value="{DynamicResource AccentColorBrush4}" />
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
+        <Setter Property="Foreground" Value="{DynamicResource MetroDataGrid.HighlightTextBrush}" />
+        <Setter Property="Controls:ControlsHelper.ContentCharacterCasing" Value="Normal" />
+    </Style>
+
+    <!--Override GroupBox-->
+    <Style BasedOn="{StaticResource MetroGroupBox}" TargetType="{x:Type GroupBox}">
+        <Setter Property="Controls:ControlsHelper.ContentCharacterCasing" Value="Normal" />
     </Style>
 
     <!--ToolBarTray-->
