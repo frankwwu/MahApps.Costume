@@ -1,0 +1,58 @@
+﻿<controls:MetroWindow x:Class="MahApps.Costume.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+        mc:Ignorable="d"
+        TitleCharacterCasing="Normal"     
+        WindowState="{Binding WindowState, Mode=TwoWay}"
+        Icon="{Binding Icon}"     
+        Title="{Binding Title}" Height="400" Width="700">
+    <controls:MetroWindow.Resources>
+        <Rectangle x:Key="AppThemeMenuIcon" Width="16" Height="16" x:Shared="False" Fill="{Binding ColorBrush, Mode=OneWay}" 
+                   Stroke="{Binding BorderColorBrush, Mode=OneWay}" StrokeThickness="1" />
+        <Rectangle x:Key="AccentMenuIcon" Width="16" Height="16" x:Shared="False" Fill="{Binding ColorBrush, Mode=OneWay}" />
+
+        <Style x:Key="AppThemeMenuItemStyle" BasedOn="{StaticResource MahApps.Styles.MenuItem}" TargetType="{x:Type MenuItem}">
+            <Setter Property="Command" Value="{Binding ChangeAccentCommand}" />
+            <Setter Property="Header" Value="{Binding Name, Mode=OneWay}" />
+            <Setter Property="Icon" Value="{StaticResource AppThemeMenuIcon}" />
+        </Style>
+
+        <Style x:Key="AccentColorMenuItemStyle" BasedOn="{StaticResource MahApps.Styles.MenuItem}" TargetType="{x:Type MenuItem}">
+            <Setter Property="Command" Value="{Binding ChangeAccentCommand}" />
+            <Setter Property="Header" Value="{Binding Name, Mode=OneWay}" />
+            <Setter Property="Icon" Value="{StaticResource AccentMenuIcon}" />
+        </Style>
+    </controls:MetroWindow.Resources>
+    <controls:MetroWindow.RightWindowCommands>
+        <controls:WindowCommands >
+            <Menu>
+                <MenuItem Header="Theme" ItemContainerStyle="{StaticResource AppThemeMenuItemStyle}" 
+                          ItemsSource="{Binding AppThemes, Mode=OneWay}" />
+                <MenuItem Header="Accent" ItemContainerStyle="{StaticResource AccentColorMenuItemStyle}" 
+                          ItemsSource="{Binding AccentColors, Mode=OneWay}" />
+            </Menu>
+        </controls:WindowCommands>
+    </controls:MetroWindow.RightWindowCommands>
+
+    <Grid>
+        <DataGrid ItemsSource="{Binding Themes}" GridLinesVisibility="Horizontal" SelectionMode="Single"
+                                          IsReadOnly="True" CanUserAddRows="False" RowHeaderWidth="0" >
+            <DataGrid.RowDetailsTemplate>
+                <DataTemplate>
+                    <DockPanel LastChildFill="True" >
+                        <Rectangle Width="20" Fill="{StaticResource {x:Static SystemColors.GrayTextBrushKey}}" DockPanel.Dock="Left" />
+                        <StackPanel>
+                            <DataGrid ItemsSource="{Binding Resources}" GridLinesVisibility="Horizontal" SelectionMode="Single"
+                                          IsReadOnly="True" CanUserAddRows="False" RowHeaderWidth="0" />
+                            <DataGrid ItemsSource="{Binding LibraryThemes}" GridLinesVisibility="Horizontal" SelectionMode="Single"
+                                          IsReadOnly="True" CanUserAddRows="False" RowHeaderWidth="0" />
+                        </StackPanel>
+                    </DockPanel>
+                </DataTemplate>
+            </DataGrid.RowDetailsTemplate>
+        </DataGrid>
+    </Grid>
+</controls:MetroWindow>
